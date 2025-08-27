@@ -10,14 +10,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: |
-    export PATH=$PATH:$HOME/.dotnet
-    export DOTNET_ROOT=$HOME/.dotnet
-    dotnet --info
+- script: dotnet --info
   displayName: 'Verify .NET Installation'
 
 - script: |
-    export PATH=$PATH:$HOME/.dotnet
-    export DOTNET_ROOT=$HOME/.dotnet
-    dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+    # Build only the .NET Core projects explicitly
+    dotnet build WebApp/WebApp.csproj --configuration $(buildConfiguration)
+    dotnet build WebApp.UnitTest/WebApp.UnitTest.csproj --configuration $(buildConfiguration)
+  displayName: 'Build .NET Core Projects Only'
