@@ -3,11 +3,21 @@ trigger:
 
 pool:
   name: Linux-AP
-  # demands:  # Commented out for testing
+  demands:
+  - Agent.Name -equals demopool-vm
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
+- script: |
+    echo "Agent Name: $(Agent.Name)"
+    echo "Agent Machine Name: $(Agent.MachineName)"
+    echo "Working Directory: $(System.DefaultWorkingDirectory)"
+  displayName: 'Debug Agent Information'
+
+- script: dotnet --info
+  displayName: 'Check .NET SDK Version'
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
