@@ -10,14 +10,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: |
-    echo "Agent Name: $(Agent.Name)"
-    echo "Agent Machine Name: $(Agent.MachineName)"
-    echo "Working Directory: $(System.DefaultWorkingDirectory)"
-  displayName: 'Debug Agent Information'
-
 - script: dotnet --info
-  displayName: 'Check .NET SDK Version'
+  displayName: 'Verify .NET SDK Version'
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+
+- script: echo "Build completed successfully!"
+  displayName: 'Completion Message'
