@@ -7,7 +7,9 @@ trigger:
 - main
 
 pool:
-  vmImage: demopool-vm
+  name: Linux-AP
+  demands:
+  - agent.name -equals demopool-vm
 
 variables:
   buildConfiguration: 'Release'
